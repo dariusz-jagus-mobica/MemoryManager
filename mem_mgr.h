@@ -10,4 +10,6 @@ void mem_mgr_free(void *ptr);
 size_t mem_mgr_size_get(void);
 void mem_mgr_list_print(void);
 
+size_t mem_mgr_malloc_max(void);
+
 #endif /* MEM_MGR_H_ */
