@@ -1,5 +1,6 @@
 #include "mem_mgr.h"
 
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -128,4 +129,27 @@ void mem_mgr_list_print(void) {
 	puts("|-------------------------------------------|");
 	printf("|      Total       | %20u B |\n", total);
 	puts("|===========================================|");
+}
+
+size_t mem_mgr_malloc_max(void)
+{
+	size_t low = 0, high = SIZE_MAX, current;
+	void *ptr;
+
+	do
+	{
+		current = (high - low) / 2 + low;
+		ptr = malloc(current);
+		if (ptr != NULL)
+		{
+			low = current;
+			free(ptr);
+		}
+		else
+		{
+			high = current;
+		}
+	} while (high - low > 1);
+
+	return low;
 }
