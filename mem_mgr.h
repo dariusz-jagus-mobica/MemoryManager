@@ -11,5 +11,6 @@ size_t mem_mgr_size_get(void);
 void mem_mgr_list_print(void);
 
 size_t mem_mgr_malloc_max(void);
+size_t mem_mgr_hash(const void *data, size_t size);
 
 #endif /* MEM_MGR_H_ */
