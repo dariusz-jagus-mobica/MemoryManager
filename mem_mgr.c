@@ -153,3 +153,20 @@ size_t mem_mgr_malloc_max(void)
 
 	return low;
 }
+
+size_t mem_mgr_hash(const void *data, size_t size)
+{
+	const unsigned char *ptr = data;
+	const unsigned char shift_mask = sizeof(size_t) - 1;
+	unsigned char shift = 0;
+	size_t ret = 0;
+
+	while (size != 0) {
+		ret ^= (size_t)*ptr << (shift & shift_mask) * 8;
+		++ptr;
+		++shift;
+		--size;
+	}
+
+	return ret;
+}
